@@ -40,12 +40,12 @@ function App() {
 
   return (
     <>
-      <header id="header"></header>
+      <header id="header">COVID-19 Verified Infected People</header>
       <div id="Page">
         {list.length > 0 && (
           <div>
             <select
-              className="drop-down"
+              className="drop-down firstList"
               key="firstChoice"
               onChange={(e) =>
                 setFirstChoice(
@@ -60,7 +60,7 @@ function App() {
               {makeSelect(list)}
             </select>
             <select
-              className="drop-down"
+              className="drop-down secondList"
               key="secondChoice"
               onChange={(e) =>
                 setSecondChoice(
