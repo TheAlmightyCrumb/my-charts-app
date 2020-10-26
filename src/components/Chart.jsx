@@ -1,11 +1,14 @@
+import { useEffect, useState } from "react";
 import {
-  Legend,
   Area,
   AreaChart,
+  Bar,
+  BarChart,
   CartesianGrid,
+  Legend,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
 } from "recharts";
 
 export default function Chart(props) {
@@ -30,6 +33,21 @@ export default function Chart(props) {
       newDataArray.push(newObj);
     }
   }
+
+  const [totalSummary, setTotalSummary] = useState();
+
+  useEffect(() => {
+    fetch("https://api.covid19api.com/world/total")
+      .then((res) => res.json())
+      .then((res) =>
+        setTotalSummary({
+          name: "Numbers Summary",
+          sick: res["TotalConfirmed"],
+          dead: res["TotalDeaths"],
+          recovered: res["TotalRecovered"],
+        })
+      );
+  }, []);
 
   return (
     <section id="chart-section">
@@ -69,6 +87,23 @@ export default function Chart(props) {
           fill="url(#colorSecond)"
         />
       </AreaChart>
+      {totalSummary && (
+        <BarChart
+          width={400}
+          height={200}
+          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+          data={[totalSummary]}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey={Object.keys(totalSummary)[0]} />
+          <YAxis hide />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey={Object.keys(totalSummary)[1]} fill="darkred" />
+          <Bar dataKey={Object.keys(totalSummary)[2]} fill="darkgray" />
+          <Bar dataKey={Object.keys(totalSummary)[3]} fill="green" />
+        </BarChart>
+      )}
     </section>
   );
 }
