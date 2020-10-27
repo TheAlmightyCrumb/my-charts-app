@@ -17,7 +17,7 @@
 
 #Page {
   font-family: 'Questrial', sans-serif;
-  width: 100vw;
+  width: 100%;
   margin-top: 55px;
   display: flex;
   flex-flow: column wrap;
@@ -26,7 +26,12 @@
   z-index: 0;
 }
 
-#chart-section {
+ #chart-infected {
+  max-width: 75vw;
+  z-index: 0;
+}
+
+#chart-summary {
   max-width: 75vw;
   z-index: 0;
 }

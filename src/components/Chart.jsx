@@ -50,7 +50,8 @@ export default function Chart(props) {
   }, []);
 
   return (
-    <section id="chart-section">
+    <>
+    <section id="chart-infected">
       <AreaChart
         width={800}
         height={400}
@@ -87,7 +88,9 @@ export default function Chart(props) {
           fill="url(#colorSecond)"
         />
       </AreaChart>
+      </section>
       {totalSummary && (
+        <section id="chart-summary">
         <BarChart
           width={400}
           height={200}
@@ -103,7 +106,8 @@ export default function Chart(props) {
           <Bar dataKey={Object.keys(totalSummary)[2]} fill="darkgray" />
           <Bar dataKey={Object.keys(totalSummary)[3]} fill="green" />
         </BarChart>
+        </section>
       )}
-    </section>
+    </>
   );
 }
